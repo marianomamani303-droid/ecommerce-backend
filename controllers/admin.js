@@ -16,6 +16,9 @@ const guardar_productos = async (req, res) => {
       tamano
     } = req.body;
 
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+
     if (!req.file) {
       return res.status(400).json({
         mensaje: "La imagen es obligatoria"
@@ -26,8 +29,8 @@ const guardar_productos = async (req, res) => {
 
     await pool.execute(
       `INSERT INTO productos
-      (nombre,marca,categoria,descripcion,precio,oferta,stock,imagen,sku,tamano)
-      VALUES (?,?,?,?,?,?,?,?,?,?)`,
+      (nombre, marca, categoria, descripcion, precio, oferta, stock, imagen, sku, tamano)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         nombre,
         marca,
@@ -42,14 +45,16 @@ const guardar_productos = async (req, res) => {
       ]
     );
 
-    res.json({
+    res.status(201).json({
       mensaje: "Producto guardado"
     });
 
   } catch (error) {
+    console.error("ERROR REAL:", error);
 
     res.status(500).json({
-      mensaje: "Error al guardar producto"
+      mensaje: "Error al guardar producto",
+      error: error.message
     });
   }
 };
