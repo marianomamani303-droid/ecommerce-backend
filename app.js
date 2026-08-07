@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import { registro, login, eliminarUsuario,mostrar_datos } from "./controllers/auth.js";
+import { registro, login,mostrar_datos } from "./controllers/auth.js";
 import { guardar_productos, obtener_productos,eliminar_productoB } from "./controllers/admin.js";
 import { mostProdFrontend, mostInfoProd, carrito, mostrarCarrito, eliminar_producto, limpiar_carrito } from "./controllers/home.js";
 
