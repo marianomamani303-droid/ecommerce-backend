@@ -12,8 +12,8 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
 
   ssl: {
-    ca: fs.readFileSync("./ca (1).pem"),
-  },
+    ca: process.env.MYSQL_CA
+  }
 });
 
 export default pool;
